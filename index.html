@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D_Wassin</title>
+<link rel="icon" href="img/coeur.png" type="image/png">
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+height:100vh;
+background:#fde7ec;
+display:flex;
+justify-content:center;
+align-items:center;
+font-family:'Poppins', sans-serif;
+overflow:hidden;
+}
+
+/* floating hearts */
+.heart{
+position:absolute;
+font-size:18px;
+color:#d8a2af;
+animation:float 8s infinite ease-in-out;
+opacity:0.6;
+}
+
+@keyframes float{
+0%{transform:translateY(0);}
+50%{transform:translateY(-40px);}
+100%{transform:translateY(0);}
+}
+
+.card{
+background:white;
+width:420px;
+padding:60px 40px;
+border-radius:30px;
+text-align:center;
+box-shadow:0 25px 60px rgba(255,105,135,0.35);
+animation:pop 0.8s ease;
+}
+
+@keyframes pop{
+from{transform:scale(0.8);opacity:0;}
+to{transform:scale(1);opacity:1;}
+}
+
+h1{
+font-family:'Playfair Display', serif;
+color:#a4142d;
+font-size:32px;
+}
+
+.name{
+font-family:'Playfair Display', serif;
+font-size:40px;
+color:#c21837;
+margin:20px 0 40px;
+}
+
+.buttons{
+background:#eee;
+border-radius:50px;
+display:inline-flex;
+padding:6px;
+position:relative;
+}
+
+button{
+width:120px;
+padding:14px;
+border:none;
+border-radius:50px;
+font-size:18px;
+cursor:pointer;
+transition:all 0.4s cubic-bezier(.68,-0.55,.27,1.55);
+}
+
+#yesBtn{
+background:#b1122f;
+color:white;
+box-shadow:0 8px 20px rgba(177,18,47,0.5);
+}
+
+#noBtn{
+background:#ccc;
+color:#555;
+position:absolute;
+right:6px;
+}
+
+.message{
+margin-top:30px;
+font-size:22px;
+color:#b1122f;
+display:none;
+animation:fade 0.6s ease;
+}
+
+@keyframes fade{
+from{opacity:0;}
+to{opacity:1;}
+}
+
+.footer{
+margin-top:35px;
+font-size:14px;
+color:#777;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Floating hearts -->
+<div class="heart" style="left:10%;top:20%;">♥</div>
+<div class="heart" style="left:85%;top:30%;">♥</div>
+<div class="heart" style="left:20%;top:70%;">♥</div>
+
+<div class="card">
+
+<h1>Veux-tu être mon Valentin, Wassim ?</h1>
+
+<div class="buttons">
+    <button id="yesBtn">Oui</button>
+    <button id="noBtn">Non</button>
+</div>
+
+<div class="footer">♥ Valentine's Day – February 14</div>
+
+</div>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+
+// Bouton "Non" qui bouge
+noBtn.addEventListener("mouseenter", () => {
+    const x = Math.random() * 200 - 100;
+    const y = Math.random() * 200 - 100;
+    noBtn.style.transform = `translate(${x}px, ${y}px) rotate(${Math.random()*20-10}deg)`;
+});
+
+// Bouton "Oui" qui affiche le message, l'image et la musique
+yesBtn.addEventListener("click", () => {
+    // Cacher les boutons et le texte précédent
+    document.querySelector(".buttons").style.display = "none";
+    document.querySelector("h1").style.display = "none";
+
+    // Créer l'image et le message
+    const img = document.createElement("img");
+    img.src = "/img/wassim.jpg"; // Remplace par ton image
+    img.style.width = "150px";
+    img.style.marginTop = "20px";
+    img.style.borderRadius = "20px";
+    img.style.transition = "all 0.5s ease";
+
+    const message = document.createElement("div");
+    message.innerHTML =   "أنت الأمان الذي لا أ ريد أن يفارقني  <br> je t’aime plus que tout♥️💍";
+    message.style.fontSize = "22px";
+    message.style.color = "#b1122f";
+    message.style.marginTop = "20px";
+    message.style.animation = "fade 0.6s ease";
+
+    // Ajouter à la carte
+    const card = document.querySelector(".card");
+    card.appendChild(img);
+    card.appendChild(message);
+
+    // --- Ajouter l'interface musicale ---
+    const audioContainer = document.createElement("div");
+    audioContainer.style.marginTop = "20px";
+
+    const audio = document.createElement("audio");
+    audio.src = "/musique/Haneen.mp3"; // Remplace par le chemin de ta musique
+    audio.controls = true; // Affiche les boutons play/pause/volume
+    audio.autoplay = true; // Démarre automatiquement
+
+    audioContainer.appendChild(audio);
+    card.appendChild(audioContainer);
+});
+</script>
+
+</body>
+</html>
