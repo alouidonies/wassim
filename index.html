@@ -171,12 +171,21 @@ yesBtn.addEventListener("click", () => {
     card.appendChild(img);
     card.appendChild(message);
 
-    const audio = document.createElement("audio");
-    audio.src = "haneen.mp3";
-    audio.controls = true;
-    audio.autoplay = true;
+   const audio = document.createElement("audio");
+audio.controls = true;
 
-    card.appendChild(audio);
+const source = document.createElement("source");
+source.src = "haneen.mp3";
+source.type = "audio/mpeg";
+
+audio.appendChild(source);
+card.appendChild(audio);
+
+// force la lecture après clic
+audio.play().catch(err => {
+    console.log("Lecture bloquée par le navigateur :", err);
+});
+
 });
 </script>
 
